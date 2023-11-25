@@ -1,3 +1,7 @@
+using Catalog.API.Data;
+using Catalog.API.Repositories;
+using Microsoft.Extensions.Configuration;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,6 +11,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+//builder.Services.Configure<CatalogContext>(builder.Configuration.GetSection("CourseStoreDatabase"));
+
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<ICatalogContext, CatalogContext>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
