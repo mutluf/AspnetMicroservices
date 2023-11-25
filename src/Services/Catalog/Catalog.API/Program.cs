@@ -12,8 +12,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
-//builder.Services.Configure<CatalogContext>(builder.Configuration.GetSection("CourseStoreDatabase"));
-
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ICatalogContext, CatalogContext>();
 var app = builder.Build();
