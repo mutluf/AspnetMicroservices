@@ -4,11 +4,11 @@ namespace Discount.API.Extensions
 {
     public static class HostExtensions
     {
-        public static IHost MigrateDatabase<TContext>(this IHost host, int? retry=0)
+        public static IHost MigrateDatabase<TContext>(this IHost host, int? retry = 0)
         {
             int retryForAvailability = retry.Value;
 
-            using(var scope = host.Services.CreateScope())
+            using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
                 var configuration = services.GetRequiredService<IConfiguration>();
@@ -16,23 +16,24 @@ namespace Discount.API.Extensions
 
                 try
                 {
-                    logger.LogInformation("Migrating PostgreSQL database");
-                    using var connection = new NpgsqlConnection(configuration.GetValue<string>("DatabaseSettings:ConnectionString"));
+                    logger.LogInformation("Migrating postresql database.");
 
+                    using var connection = new NpgsqlConnection
+                        (configuration.GetValue<string>("DatabaseSettings:ConnectionString"));
                     connection.Open();
 
                     using var command = new NpgsqlCommand
                     {
-                        Connection = connection,
+                        Connection = connection
                     };
 
                     command.CommandText = "DROP TABLE IF EXISTS Coupon";
                     command.ExecuteNonQuery();
 
-                    command.CommandText = @"CREATE TABLE Coupon(Id SERIAL PRİMARY KEY,
+                    command.CommandText = @"CREATE TABLE Coupon(Id SERIAL PRIMARY KEY, 
                                                                 ProductName VARCHAR(24) NOT NULL,
                                                                 Description TEXT,
-                                                                Amount INT";
+                                                                Amount INT)";
                     command.ExecuteNonQuery();
 
                     command.CommandText = "INSERT INTO Coupon(ProductName, Description, Amount) VALUES('IPhone X', 'IPhone Discount', 150);";
@@ -45,17 +46,17 @@ namespace Discount.API.Extensions
                 }
                 catch (NpgsqlException ex)
                 {
-
                     logger.LogError(ex, "An error occurred while migrating the postresql database");
 
                     if (retryForAvailability < 50)
                     {
                         retryForAvailability++;
-                        Thread.Sleep(2000);
+                        System.Threading.Thread.Sleep(2000);
                         MigrateDatabase<TContext>(host, retryForAvailability);
                     }
                 }
             }
+
             return host;
         }
     }
