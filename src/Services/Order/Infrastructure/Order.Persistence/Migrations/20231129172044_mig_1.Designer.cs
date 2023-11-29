@@ -12,8 +12,8 @@ using Order.Persistence.Context;
 namespace Order.Persistence.Migrations
 {
     [DbContext(typeof(OrderDbContext))]
-    [Migration("20231129124805_initial")]
-    partial class initial
+    [Migration("20231129172044_mig_1")]
+    partial class mig_1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,7 +38,6 @@ namespace Order.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CVV")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CardName")
@@ -90,8 +89,8 @@ namespace Order.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("TotalPrice")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("TotalPrice")
+                        .HasColumnType("float");
 
                     b.Property<string>("UserName")
                         .IsRequired()

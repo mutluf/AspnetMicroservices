@@ -13,6 +13,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//builder.Services.MigrateDatabase<OrderDbContext>((context, services) =>
+//{
+//    var logger = services.GetService<ILogger<OrderContextDbSeed>>();
+//    OrderContextDbSeed
+//        .SeedAsync(context, logger)
+//        .Wait();
+//});
+
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddPersistenceServices(builder.Configuration);
