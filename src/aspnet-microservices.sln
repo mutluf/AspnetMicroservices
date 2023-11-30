@@ -45,7 +45,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.Messages", "Buildi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGateways", "ApiGateways", "{D6BFE707-CC27-4ADC-B72E-AB6E2A08E5F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OcelotApiGateway", "ApiGateways\OcelotApiGateway\OcelotApiGateway.csproj", "{ACBF102C-71F0-490F-8A6C-54C32735554F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OcelotApiGateway", "ApiGateways\OcelotApiGateway\OcelotApiGateway.csproj", "{ACBF102C-71F0-490F-8A6C-54C32735554F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopping.Aggregator", "ApiGateways\Shopping.Aggregator\Shopping.Aggregator.csproj", "{C4832E8B-3624-4F10-B5A8-30319A4BE4C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -101,6 +103,10 @@ Global
 		{ACBF102C-71F0-490F-8A6C-54C32735554F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ACBF102C-71F0-490F-8A6C-54C32735554F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ACBF102C-71F0-490F-8A6C-54C32735554F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4832E8B-3624-4F10-B5A8-30319A4BE4C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4832E8B-3624-4F10-B5A8-30319A4BE4C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4832E8B-3624-4F10-B5A8-30319A4BE4C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4832E8B-3624-4F10-B5A8-30319A4BE4C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -124,6 +130,7 @@ Global
 		{0CA205EE-876F-4017-866F-3A693B91E682} = {4ADC8369-B641-46A8-862B-FC3FA3A1AE07}
 		{CFAFC241-A557-4881-81A9-0E8AA52D16C9} = {9086E45D-D46F-4FF1-87F2-E17C29A17955}
 		{ACBF102C-71F0-490F-8A6C-54C32735554F} = {D6BFE707-CC27-4ADC-B72E-AB6E2A08E5F5}
+		{C4832E8B-3624-4F10-B5A8-30319A4BE4C6} = {D6BFE707-CC27-4ADC-B72E-AB6E2A08E5F5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CB67989F-E42A-4110-B994-D641EF4BC0A3}
