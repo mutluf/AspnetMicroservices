@@ -13,19 +13,19 @@ namespace Shopping.Aggregator.Services
 
         public async Task<IEnumerable<CatalogModel>> GetCatalog()
         {
-            var response = await _client.GetAsync("/api/v1/Catalog");
+            var response = await _client.GetAsync("/api/v1/catalog");
             return await response.Content.ReadFromJsonAsync<List<CatalogModel>>();
         }
 
         public async Task<CatalogModel> GetCatalog(string id)
         {
-            var response = await _client.GetAsync($"/api/v1/Catalog/{id}");
+            var response = await _client.GetAsync($"/api/v1/catalog/{id}");
             return await response.Content.ReadFromJsonAsync<CatalogModel>();
         }
 
         public async Task<IEnumerable<CatalogModel>> GetCatalogByCategory(string category)
         {
-            var response = await _client.GetAsync($"/api/v1/Catalog/GetProductByCategory/{category}");
+            var response = await _client.GetAsync($"/api/v1/catalog/{category}");
             return await response.Content.ReadFromJsonAsync<List<CatalogModel>>();
         }
     }

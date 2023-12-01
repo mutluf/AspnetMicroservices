@@ -13,7 +13,7 @@ namespace Shopping.Aggregator.Services
 
         public async Task<BasketModel> GetBasket(string userName)
         {
-            var response = await _client.GetAsync($"/api/v1/Basket/{userName}");
+            var response = await _client.GetAsync($"/api/v1/basket/{userName}");
             return await response.Content.ReadFromJsonAsync<BasketModel>();
         }
     }
