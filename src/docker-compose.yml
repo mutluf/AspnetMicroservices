@@ -64,11 +64,18 @@ services:
       context: .
       dockerfile: ApiGateways/Shopping.Aggregator/Dockerfile
 
+  shopping.razorwebapp:
+    image: ${DOCKER_REGISTRY-}shoppingrazorwebapp
+    build:
+      context: .
+      dockerfile: WebApps/Shopping.RazorWebApp/Dockerfile
+
 volumes:
   mongo_data: 
   portainer_data:
   postgres_data:
   pgadmin_data:
+
 
 
 

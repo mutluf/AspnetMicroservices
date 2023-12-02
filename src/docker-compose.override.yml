@@ -148,3 +148,18 @@ services:
     ports:
       - "8005:80"
 
+
+  shopping.razorwebapp:
+    container_name: shopping.razorwebapp
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ApiSettings:GatewayAddress=http://ocelotapigateway"
+    depends_on:
+      - catalog.api
+      - basket.api
+      - order.api
+      - discount.api
+      - ocelotapigateway
+    ports:
+      - "8006:80"
+
