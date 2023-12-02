@@ -4,8 +4,8 @@ namespace Shopping.RazorWebApp.Services
 {
     public interface IBasketService
     {
-        Task<BasketModel> GetBasket(string userName);
-        Task<BasketModel> UpdateBasket(BasketModel model);
+        Task<BasketModel> GetBasketAsync(string userName);
+        Task<BasketModel> UpdateBasketAsync(BasketModel model);
         Task CheckoutBasket(BasketCheckoutModel model);
     }
 }

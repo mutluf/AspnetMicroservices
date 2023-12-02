@@ -1,22 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Shopping.RazorWebApp.Entities;
-using Shopping.RazorWebApp.Repositories.Abstractions;
+using Shopping.RazorWebApp.Models;
+using Shopping.RazorWebApp.Services;
 
 namespace Shopping.RazorWebApp
 {
     public class ProductDetailModel : PageModel
     {
-        private readonly IProductRepository _productRepository;
-        private readonly ICartRepository _cartRepository;
+        private readonly ICatalogService _catalogService;
+        private readonly IBasketService _basketService;
 
-        public ProductDetailModel(IProductRepository productRepository, ICartRepository cartRepository)
+        public ProductDetailModel(ICatalogService catalogService, IBasketService basketService)
         {
-            _productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));
-            _cartRepository = cartRepository ?? throw new ArgumentNullException(nameof(cartRepository));
+            _catalogService = catalogService;
+            _basketService = basketService;
         }
 
-        public Product Product { get; set; }
+        public CatalogModel Product { get; set; }
 
         [BindProperty]
         public string Color { get; set; }
@@ -24,14 +24,14 @@ namespace Shopping.RazorWebApp
         [BindProperty]
         public int Quantity { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? productId)
+        public async Task<IActionResult> OnGetAsync(string productId)
         {
             if (productId == null)
             {
                 return NotFound();
             }
 
-            Product = await _productRepository.GetProductById(productId.Value);
+            Product = await _catalogService.GetCatalogAsync(productId);
             if (Product == null)
             {
                 return NotFound();
@@ -39,12 +39,24 @@ namespace Shopping.RazorWebApp
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAddToCartAsync(int productId)
+        public async Task<IActionResult> OnPostAddToCartAsync(string productId)
         {
-            //if (!User.Identity.IsAuthenticated)
-            //    return RedirectToPage("./Account/Login", new { area = "Identity" });
+            var product = await _catalogService.GetCatalogAsync(productId);
 
-            await _cartRepository.AddItem("test", productId, Quantity, Color);
+            var userName = "mutlu";
+            var basket = await _basketService.GetBasketAsync(userName);
+
+            basket.Items.Add(new BasketItemModel
+            {
+                ProductId = productId,
+                ProductName = product.Name,
+                Price = product.Price,
+                Quantity = Quantity,
+                Color = Color
+            });
+
+            var basketUpdated = await _basketService.UpdateBasketAsync(basket);
+
             return RedirectToPage("Cart");
         }
     }

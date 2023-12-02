@@ -11,13 +11,13 @@ namespace Shopping.RazorWebApp.Services
             _client = client ?? throw new ArgumentNullException(nameof(client));
         }
 
-        public async Task<BasketModel> GetBasket(string userName)
+        public async Task<BasketModel> GetBasketAsync(string userName)
         {
             var response = await _client.GetAsync($"/basket/{userName}");
             return await response.Content.ReadFromJsonAsync<BasketModel>();
         }
 
-        public async Task<BasketModel> UpdateBasket(BasketModel model)
+        public async Task<BasketModel> UpdateBasketAsync(BasketModel model)
         {
             var response = await _client.PutAsJsonAsync($"/basket", model);
             if (response.IsSuccessStatusCode)

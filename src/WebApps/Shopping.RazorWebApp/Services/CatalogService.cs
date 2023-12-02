@@ -11,13 +11,13 @@ namespace Shopping.RazorWebApp.Services
             _client = client ?? throw new ArgumentNullException(nameof(client));
         }
 
-        public async Task<IEnumerable<CatalogModel>> GetCatalog()
+        public async Task<IEnumerable<CatalogModel>> GetCatalogsAsync()
         {
             var response = await _client.GetAsync("/catalog");
             return await response.Content.ReadFromJsonAsync<List<CatalogModel>>();
         }
 
-        public async Task<CatalogModel> GetCatalog(string id)
+        public async Task<CatalogModel> GetCatalogAsync(string id)
         {
             var response = await _client.GetAsync($"/catalog/{id}");
             return await response.Content.ReadFromJsonAsync<CatalogModel>();
